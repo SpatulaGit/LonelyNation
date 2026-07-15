@@ -1,17 +1,22 @@
 package spatularat.modernnations.client;
 
+
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import spatularat.modernnations.client.command.MNationsCommand;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import spatularat.modernnations.client.command.CommandManager;
+import spatularat.modernnations.client.config.ConfigManager;
+
 
 public class ModernNationsClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient(){
 
-		CommandRegistrationCallback.EVENT.register(
-				(dispatcher, registryAccess, environment) -> {
-					MNationsCommand.register(dispatcher);
-				}
+		ConfigManager.load();
+
+		ClientCommandRegistrationCallback.EVENT.register(
+				((dispatcher, registryAccess) -> {
+					CommandManager.register(dispatcher);
+				})
 		);
 	}
 }
