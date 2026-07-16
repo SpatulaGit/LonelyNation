@@ -20,7 +20,8 @@ public class CommandManager {
 					);
 					return 1;
 				})
-				.then(HelpCommand.create());
+				.then(HelpCommand.create())
+				.then(NationCommand.create());
 	}
 
 	//DO NOT TOUCH
