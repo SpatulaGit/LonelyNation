@@ -3,17 +3,17 @@
 	"id": "lonely-nation",
 	"version": "${version}",
 	"name": "Lonely Nation",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "A Minecraft mod for simulating different government systems with villagers.",
 	"authors": [
-		"Me!"
+		"Spatula_Rat"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/SpatulaGit/LonelyNation"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/lonely-nation/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"main": [
 			"spatularat.lonelynation.LonelyNation"

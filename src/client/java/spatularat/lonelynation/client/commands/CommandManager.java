@@ -1,4 +1,4 @@
-package spatularat.lonelynation.client;
+package spatularat.lonelynation.client.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;

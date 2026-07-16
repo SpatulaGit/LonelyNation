@@ -1,4 +1,4 @@
-package spatularat.lonelynation.client;
+package spatularat.lonelynation.client.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
