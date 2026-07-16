@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "spatularat.modernnations.client.mixin",
+	"package": "spatularat.lonelynation.client.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"ExampleClientMixin"

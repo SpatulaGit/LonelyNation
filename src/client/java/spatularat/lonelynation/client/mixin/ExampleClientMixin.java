@@ -1,4 +1,4 @@
-package spatularat.modernnations.client.mixin;
+package spatularat.lonelynation.client.mixin;
 
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
