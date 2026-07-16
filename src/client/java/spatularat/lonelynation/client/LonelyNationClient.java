@@ -1,13 +1,11 @@
-package spatularat.modernnations.client;
-
+package spatularat.lonelynation.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
-import spatularat.modernnations.client.command.CommandManager;
-import spatularat.modernnations.client.config.ConfigManager;
+import spatularat.lonelynation.client.command.CommandManager;
+import spatularat.lonelynation.client.config.ConfigManager;
 
-
-public class ModernNationsClient implements ClientModInitializer {
+public class LonelyNationClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient(){
 
