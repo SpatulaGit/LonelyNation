@@ -20,6 +20,8 @@ public class ChunkFunctions {
             EntityType.CHICKEN
     );
 
+    private static int villagerBabyCount = 0;
+
     public static ChunkData updateChunkData(long chunkID, WorldData worldData) {
 
         ClientWorld world = MinecraftClient.getInstance().world;
@@ -29,6 +31,18 @@ public class ChunkFunctions {
         ChunkData chunkData = worldData.claimedChunks.get(chunkID);
 
         if (chunkData != null) {
+
+            chunkData.babyVillagers = 0;
+            chunkData.unemployedVillagers = 0;
+            chunkData.nitwits = 0;
+            chunkData.ironGolems = 0;
+            chunkData.hostileMobs = 0;
+            chunkData.petMobs = 0;
+
+            chunkData.villagerRaces.clear();
+            chunkData.villagerProfessions.clear();
+            chunkData.farmAnimals.clear();
+
             for (Entity entity : world.getEntities()) {
                 if (!entity.getChunkPos().equals(pos)) {
                     continue;

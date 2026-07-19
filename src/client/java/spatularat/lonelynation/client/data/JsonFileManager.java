@@ -11,15 +11,13 @@ public class JsonFileManager {
 
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-	public static void createFile(String PATH, Object TYPE){
+	public static void createFile(Path PATH, Object TYPE){
 
-		Path path = Path.of(PATH);
-
-		if (!Files.exists(path)) {
+		if (!Files.exists(PATH)) {
 			try {
-				Files.createDirectories(path.getParent());
+				Files.createDirectories(PATH.getParent());
 
-				try (BufferedWriter writer = Files.newBufferedWriter(path)){
+				try (BufferedWriter writer = Files.newBufferedWriter(PATH)){
 					GSON.toJson(TYPE, writer);
 				}
 			} catch (IOException e) {
@@ -28,11 +26,9 @@ public class JsonFileManager {
 		}
 	}
 
-	public static <T> T loadFile(String PATH, Class<T> TYPE) {
+	public static <T> T loadFile(Path PATH, Class<T> TYPE) {
 
-		Path path = Path.of(PATH);
-
-		try (BufferedReader reader = Files.newBufferedReader(path)) {
+		try (BufferedReader reader = Files.newBufferedReader(PATH)) {
 			return GSON.fromJson(reader,TYPE);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -40,13 +36,12 @@ public class JsonFileManager {
 		}
 	}
 
-	public static void saveFile(String PATH, Object TYPE) {
+	public static void saveFile(Path PATH, Object TYPE) {
 
-		Path path = Path.of(PATH);
 		try {
-			Files.createDirectories(path.getParent());
+			Files.createDirectories(PATH.getParent());
 
-			try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+			try (BufferedWriter writer = Files.newBufferedWriter(PATH)) {
 				GSON.toJson(TYPE,writer);
 			}
 		} catch (IOException e) {

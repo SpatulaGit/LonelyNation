@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.ChunkPos;
 import spatularat.lonelynation.client.commands.CommandManager;
@@ -20,10 +21,16 @@ public class LonelyNationClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient(){
 
-		JsonFileManager.createFile("/config/lonelynation.json", new Config());
+		JsonFileManager.createFile(ModInfo.CONFIGFILEPATH, new Config());
 
 		ClientPlayConnectionEvents.JOIN.register(((handler, sender, client) -> {
-			JsonFileManager.createFile("/lonelynation/" + ServerInfo.getWorldID() +"/ChunkData.json", new ChunkData());
+			JsonFileManager.createFile(FabricLoader
+					.getInstance()
+					.getGameDir()
+					.resolve("lonelynation")
+					.resolve(ServerInfo.getWorldID())
+					.resolve("WorldData.json")
+					, new WorldData());
 		}));
 
 		ClientCommandRegistrationCallback.EVENT.register(
@@ -41,10 +48,15 @@ public class LonelyNationClient implements ClientModInitializer {
 				if (MinecraftClient.getInstance().options == null) return;
 				int renderDistance = MinecraftClient.getInstance().options.getViewDistance().getValue();
 
-				WorldData worldData = JsonFileManager.loadFile("/lonelynation/" + ServerInfo.getWorldID() +"/ChunkData.json", WorldData.class);
+				WorldData worldData = JsonFileManager.loadFile(FabricLoader
+						.getInstance()
+						.getGameDir()
+						.resolve("lonelynation")
+						.resolve(ServerInfo.getWorldID())
+						.resolve("WorldData.json")
+						, WorldData.class);
 
-				assert worldData != null;
-				if (client.player != null) {
+				if (client.player != null && worldData != null) {
 					ChunkPos playerChunk = client.player.getChunkPos();
 
 					for (int x = -renderDistance; x <= renderDistance; x++) {
@@ -61,10 +73,16 @@ public class LonelyNationClient implements ClientModInitializer {
 							}
 						}
 					}
+
+					JsonFileManager.saveFile(FabricLoader
+							.getInstance()
+							.getGameDir()
+							.resolve("lonelynation")
+							.resolve(ServerInfo.getWorldID())
+							.resolve("WorldData.json")
+							,worldData);
+
 				}
-
-				JsonFileManager.saveFile("/lonelynation/" + ServerInfo.getWorldID() +"/ChunkData.json",worldData);
-
 			}
 		});
 	}
